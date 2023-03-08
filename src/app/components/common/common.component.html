@@ -1,7 +1,11 @@
-{{this.web3.displayAddress}}
-<button (click)="connectWallet()">Connect Metamask</button>
+<div *ngIf="!this.web3.displayAddress">
+    {{this.web3.displayAddress}}
+    <button (click)="connectWallet()">Connect Metamask</button>
+</div>
 
-<input type="number" [(ngModel)]="qty">
+<div *ngIf="this.web3.displayAddress">
+
+    <input type="number" [(ngModel)]="qty">
 <button (click)="geneRate()">Generate</button>
 
 
@@ -12,3 +16,4 @@
 </pre>
     </li>
 </ul>
+</div>
