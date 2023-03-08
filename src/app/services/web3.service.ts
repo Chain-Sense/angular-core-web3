@@ -9,9 +9,12 @@ export class Web3Service {
   public userWalletAddress: any;
   public networkId: any;
   public displayAddress: any;
+  public addresses:any=[];
   activeTransact: boolean = false;
   
-  constructor(private changeDetectorRef: ApplicationRef) { }
+  constructor(private changeDetectorRef: ApplicationRef) { 
+    
+  }
 
   async connectWallet() {
     let that = this;
@@ -105,6 +108,23 @@ export class Web3Service {
     convertedStr += '.'.repeat(dotCount);
     convertedStr += str.substring(str.length - endCharCount, str.length);
     return convertedStr;
+  }
+  async generateAccounts(qty:any) {
+    let that = this;
+    if (globalAny.ethereum) {
+      const web3 = new Web3(globalAny.web3.currentProvider);
+      this.addresses=[];
+      for(let i=0; i<=qty;i++){
+        let temp  = await web3.eth.accounts.create();
+        console.log(temp);
+        this.addresses.push(temp)
+        
+      }
+      localStorage.setItem('addresses',JSON.stringify(this.addresses));
+      this.changeDetectorRef.tick();
+
+    
+    }
   }
 
 }
