@@ -11,7 +11,9 @@ export class CommonComponent implements OnInit {
   constructor(public web3 :Web3Service) { }
 
   ngOnInit(): void {
+    
+  }
+  connectWallet(){
     this.web3.connectWallet();
   }
-
 }
