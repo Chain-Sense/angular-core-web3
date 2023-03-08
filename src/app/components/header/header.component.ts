@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NbMenuItem } from '@nebular/theme';
+import { Web3Service } from 'src/app/services/web3.service';
 
 @Component({
   selector: 'app-header',
@@ -25,9 +26,11 @@ export class HeaderComponent implements OnInit {
       icon: 'unlock-outline',
     },
   ];
-  constructor() { }
+  constructor(public web3 :Web3Service) { }
 
   ngOnInit(): void {
   }
-
+  connectWallet(){
+    this.web3.connectWallet();
+  }
 }

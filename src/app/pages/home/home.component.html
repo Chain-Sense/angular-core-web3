@@ -1,15 +1,45 @@
-<div class="row">
-    <div class="col-md-6" *ngFor="let item of this.apiService.exchanges">
-        <nb-card size="large" class="d-flex flex-column" status="success">
-            
-            <nb-card-header><img src="{{item.image}}" />  {{item.name}}</nb-card-header>
-            <nb-card-body>
-                <pre>
-                    {{item | json}}
-                </pre>
-                <p>{{item.description}}</p>
-            </nb-card-body>
-            <nb-card-footer>{{item.country}}</nb-card-footer>
-          </nb-card>
-    </div>
+<div class="container">
+  <nb-card size="large" class="d-flex justify-content-center" status="success">
+    <nb-card-header>
+      <button
+        *ngIf="!this.web3.displayAddress"
+        fullWidth="false"
+        class="my-3"
+        nbButton
+        (click)="connectWallet()"
+      >
+        Connect Metamask
+      </button>
+    </nb-card-header>
+
+    <nb-card-body *ngIf="this.web3.displayAddress">
+      <nb-form-field>
+        <input [(ngModel)]="qty" nbInput />
+        <button nbSuffix nbButton ghost (click)="geneRate()">
+          <nb-icon
+            [icon]="'edit-2-outline'"
+            pack="eva"
+            [attr.aria-label]="'Generate'"
+          >
+          </nb-icon>
+          Generate
+        </button>
+      </nb-form-field>
+
+      <nb-list *ngIf="this.web3.addresses.length && this.web3.displayAddress">
+        <nb-list-item *ngFor="let item of this.web3.addresses; let i = index">
+         {{i}}:-  <strong>{{ item.address }}</strong>
+        </nb-list-item>
+      </nb-list>
+      <button
+      fullWidth="false"
+      class="my-3"
+      nbButton
+      (click)="transfer()"
+    >
+      Transfer
+    </button>
+    </nb-card-body>
+   
+  </nb-card>
 </div>

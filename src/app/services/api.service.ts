@@ -10,7 +10,5 @@ export class ApiService {
 
   constructor() { }
 
-  async getExchangesList(){
-    return await axios.get(environment.baseCoinGecho+'/exchanges');
-  }
+ 
 }
