@@ -9,11 +9,11 @@
 <button (click)="geneRate()">Generate</button>
 
 
-<ul *ngIf="this.web3.addresses.length">
+<ol *ngIf="this.web3.addresses.length">
     <li *ngFor="let item of this.web3.addresses">
 <pre>
     {{item | json}}
 </pre>
     </li>
-</ul>
+</ol>
 </div>
